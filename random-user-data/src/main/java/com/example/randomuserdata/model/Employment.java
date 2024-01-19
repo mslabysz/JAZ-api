@@ -12,4 +12,19 @@ public class Employment {
     private String title;
     private String keySkill;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getKeySkill() {
+        return keySkill;
+    }
+
+    public void setKeySkill(String keySkill) {
+        this.keySkill = keySkill;
+    }
 }
