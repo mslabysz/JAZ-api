@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/random-user-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/random-user-data/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/random-user-updater/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/random-user-web-api/src/main/java" charset="UTF-8" />
   </component>
 </project>

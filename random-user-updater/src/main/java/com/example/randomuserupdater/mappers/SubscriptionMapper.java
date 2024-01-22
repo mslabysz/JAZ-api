@@ -5,23 +5,19 @@ import com.example.randomuserdata.model.Subscription;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SubscriptionMapper implements IMap<SubscriptionDto, Subscription>{
+public class SubscriptionMapper implements IMapEntities<SubscriptionDto, Subscription>{
+
     @Override
-    public SubscriptionDto toDto(Subscription subscription) {
-        SubscriptionDto dto = new SubscriptionDto();
-        dto.setPlan(subscription.getPlan());
-        dto.setStatus(subscription.getStatus());
-        dto.setPaymentMethod(subscription.getPaymentMethod());
-        dto.setTerm(subscription.getTerm());
-        return dto;
+    public Subscription mapToEntity(SubscriptionDto subscriptionDto) {
+        return map(subscriptionDto, new Subscription());
     }
+
     @Override
-    public Subscription toEntity(SubscriptionDto dto) {
-        Subscription subscription = new Subscription();
-        subscription.setPlan(dto.getPlan());
-        subscription.setStatus(dto.getStatus());
-        subscription.setPaymentMethod(dto.getPaymentMethod());
-        subscription.setTerm(dto.getTerm());
+    public Subscription map(SubscriptionDto subscriptionDto, Subscription subscription) {
+        subscription.setPlan(subscriptionDto.getPlan());
+        subscription.setStatus(subscriptionDto.getStatus());
+        subscription.setPaymentMethod(subscriptionDto.getPaymentMethod());
+        subscription.setTerm(subscriptionDto.getTerm());
         return subscription;
     }
 }

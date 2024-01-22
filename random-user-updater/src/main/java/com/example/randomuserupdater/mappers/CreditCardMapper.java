@@ -5,17 +5,16 @@ import com.example.randomuserdata.model.CreditCard;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreditCardMapper implements IMap<CreditCardDto, CreditCard>{
-            @Override
-            public CreditCardDto toDto(CreditCard creditCard) {
-                CreditCardDto dto = new CreditCardDto();
-                dto.setCcNumber(creditCard.getCcNumber());
-                return dto;
-            }
-            @Override
-            public CreditCard toEntity(CreditCardDto dto) {
-                CreditCard creditCard = new CreditCard();
-                creditCard.setCcNumber(dto.getCcNumber());
-                return creditCard;
-            }
+public class CreditCardMapper implements IMapEntities<CreditCardDto,CreditCard>{
+
+    @Override
+    public CreditCard mapToEntity(CreditCardDto creditCardDto) {
+        return map(creditCardDto, new CreditCard());
+    }
+
+    @Override
+    public CreditCard map(CreditCardDto creditCardDto, CreditCard creditCard) {
+        creditCard.setCcNumber(creditCardDto.getCcNumber());
+        return creditCard;
+    }
 }

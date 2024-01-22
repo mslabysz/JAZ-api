@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/random-user-client/pom.xml" />
         <option value="$PROJECT_DIR$/random-user-data/pom.xml" />
         <option value="$PROJECT_DIR$/random-user-updater/pom.xml" />
+        <option value="$PROJECT_DIR$/random-user-client/random-user-web-api/pom.xml" />
+        <option value="$PROJECT_DIR$/random-user-web-api/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

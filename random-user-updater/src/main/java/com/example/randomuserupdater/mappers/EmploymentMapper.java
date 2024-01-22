@@ -5,20 +5,17 @@ import com.example.randomuserdata.model.Employment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmploymentMapper implements IMap<EmploymentDto, Employment>{
-    @Override
- public EmploymentDto toDto(Employment employment) {
-  EmploymentDto dto = new EmploymentDto();
-  dto.setTitle(employment.getTitle());
-  dto.setKeySkill(employment.getKeySkill());
-  return dto;
- }
+public class EmploymentMapper implements IMapEntities<EmploymentDto,Employment>{
+
  @Override
- public Employment toEntity(EmploymentDto dto) {
-  Employment employment = new Employment();
-  employment.setTitle(dto.getTitle());
-  employment.setKeySkill(dto.getKeySkill());
-  return employment;
+ public Employment mapToEntity(EmploymentDto employmentDto) {
+  return map(employmentDto, new Employment());
  }
 
+ @Override
+ public Employment map(EmploymentDto employmentDto, Employment employment) {
+  employment.setTitle(employmentDto.getTitle());
+  employment.setKeySkill(employmentDto.getKeySkill());
+  return employment;
+ }
 }

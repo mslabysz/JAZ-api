@@ -5,30 +5,22 @@ import com.example.randomuserclient.contracts.AddressDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddressMapper implements IMap<AddressDto, Address>{
+public class AddressMapper implements IMapEntities<AddressDto, Address>{
+
 
     @Override
-    public AddressDto toDto(Address address) {
-        AddressDto dto = new AddressDto();
-        dto.setCity(address.getCity());
-        dto.setStreetName(address.getStreetName());
-        dto.setStreetAddress(address.getStreetAddress());
-        dto.setZipCode(address.getZipCode());
-        dto.setState(address.getState());
-        dto.setCountry(address.getCountry());
-        dto.setCoordinates(new CoordinatesMapper().toDto(address.getCoordinates()));
-        return dto;
+    public Address mapToEntity(AddressDto addressDto) {
+        return map(addressDto, new Address());
     }
+
     @Override
-    public Address toEntity(AddressDto dto) {
-        Address address = new Address();
-        address.setCity(dto.getCity());
-        address.setStreetName(dto.getStreetName());
-        address.setStreetAddress(dto.getStreetAddress());
-        address.setZipCode(dto.getZipCode());
-        address.setState(dto.getState());
-        address.setCountry(dto.getCountry());
-        address.setCoordinates(new CoordinatesMapper().toEntity(dto.getCoordinates()));
+    public Address map(AddressDto addressDto, Address address) {
+        address.setCity(addressDto.getCity());
+        address.setStreetName(addressDto.getStreetName());
+        address.setStreetAddress(addressDto.getStreetAddress());
+        address.setZipCode(addressDto.getZipCode());
+        address.setState(addressDto.getState());
+        address.setCountry(addressDto.getCountry());
         return address;
     }
 }

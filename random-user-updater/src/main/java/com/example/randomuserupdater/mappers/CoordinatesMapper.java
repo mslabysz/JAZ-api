@@ -5,20 +5,16 @@ import com.example.randomuserdata.model.Coordinates;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CoordinatesMapper implements IMap<CoordinatesDto, Coordinates>{
+public class CoordinatesMapper implements IMapEntities<CoordinatesDto, Coordinates>{
+    @Override
+    public Coordinates mapToEntity(CoordinatesDto coordinatesDto) {
+        return map(coordinatesDto, new Coordinates());
+    }
 
-        @Override
-        public CoordinatesDto toDto(Coordinates coordinates) {
-            CoordinatesDto dto = new CoordinatesDto();
-            dto.setLat(coordinates.getLat());
-            dto.setLng(coordinates.getLng());
-            return dto;
-        }
-        @Override
-        public Coordinates toEntity(CoordinatesDto dto) {
-            Coordinates coordinates = new Coordinates();
-            coordinates.setLat(dto.getLat());
-            coordinates.setLng(dto.getLng());
-            return coordinates;
-        }
+    @Override
+    public Coordinates map(CoordinatesDto coordinatesDto, Coordinates coordinates) {
+        coordinates.setLat(coordinatesDto.getLat());
+        coordinates.setLng(coordinatesDto.getLng());
+        return coordinates;
+    }
 }

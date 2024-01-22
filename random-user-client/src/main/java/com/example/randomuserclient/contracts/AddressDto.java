@@ -16,12 +16,5 @@ public class AddressDto {
     private String zipCode;
     private String state;
     private String country;
-
-    public void setCoordinates(CoordinatesDto dto) {
-
-    }
-
-    public CoordinatesDto getCoordinates() {
-        return null;
-    }
+    private CoordinatesDto coordinates;
 }
