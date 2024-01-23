@@ -28,15 +28,30 @@ public class UserService implements IUserService{
         return u.getId();
     }
 
+//    @Override
+//    public UserDto deleteById(long id) {
+//        var user = database.getUserRepository().findById(id).orElse(null);
+//        if(user == null){
+//            return null;
+//        }
+//        database.getUserRepository().delete(user);
+//        return mapFromUser(user);
+//    }
     @Override
-    public UserDto deleteById(long id) {
-        var user = database.getUserRepository().findById(id).orElse(null);
-        if(user == null){
-            return null;
-        }
-        database.getUserRepository().delete(user);
-        return mapFromUser(user);
+public UserDto deleteById(long id) {
+    var user = database.getUserRepository().findById(id).orElse(null);
+    if(user == null){
+        return null;
     }
+    if(user.getSubscription() != null) {
+        database.getSubscriptionRepository().delete(user.getSubscription());
+    }
+    if(user.getCreditCard() != null) {
+        database.getCreditCardRepository().delete(user.getCreditCard());
+    }
+    database.getUserRepository().delete(user);
+    return mapFromUser(user);
+}
 
     @Override
     public UserDto updateById(long id, UserDto userDto) {
