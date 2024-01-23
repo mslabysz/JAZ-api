@@ -120,6 +120,18 @@ public UserDto deleteById(long id) {
                 .toList();
     }
 
+    @Override
+    public List<UserDto> getOtherGenderUsers() {
+        var users = database.getUserRepository().findAll();
+        if(users == null){
+            return null;
+        }
+        return users.stream()
+                .filter(user -> !"Male".equalsIgnoreCase(user.getGender())&&!"Female".equalsIgnoreCase(user.getGender()))
+                .map(UserService::mapFromUser)
+                .toList();
+    }
+
     private int getAge(LocalDate dateOfBirth){
         if(dateOfBirth!=null){
             return Period.between(dateOfBirth, LocalDate.now()).getYears();

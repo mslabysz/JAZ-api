@@ -15,4 +15,5 @@ public interface IUserService {
     List<UserDto> getYoungerThan(int age);
     List<UserDto> getFemaleUsers();
     List<UserDto> getMaleUsers();
+    List<UserDto> getOtherGenderUsers();
 }

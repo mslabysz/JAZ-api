@@ -70,6 +70,14 @@ public class UserController {
         }
         return ResponseEntity.ok(users);
     }
+    @GetMapping("/other")
+    public ResponseEntity<List<UserDto>> getOtherGenderUsers(){
+        var users= userService.getOtherGenderUsers();
+        if(users == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(users);
+    }
     @PostMapping
     public ResponseEntity<Long> save(@RequestBody UserDto userDto){
         var id = userService.save(userDto);
