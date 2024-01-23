@@ -6,7 +6,6 @@ import com.example.randomuserdata.repositories.IHaveAllRepos;
 import com.example.randomuserupdater.mappers.IHaveMappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
 public class Updater implements IUpdate{
     private final IHaveMappers mappers;

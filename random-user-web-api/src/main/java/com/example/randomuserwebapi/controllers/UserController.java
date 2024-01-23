@@ -38,6 +38,38 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+    @GetMapping("/olderThan/{age}")
+    public ResponseEntity<List<UserDto>> getOlderThan(@PathVariable int age){
+        var users = userService.getOlderThan(age);
+        if(users == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(users);
+    }
+    @GetMapping("/youngerThan/{age}")
+    public ResponseEntity<List<UserDto>> getYoungerThan(@PathVariable int age){
+        var users = userService.getYoungerThan(age);
+        if(users == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(users);
+    }
+    @GetMapping("/male")
+    public ResponseEntity<List<UserDto>> getMaleUsers(){
+        var users= userService.getMaleUsers();
+        if(users == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(users);
+    }
+    @GetMapping("/female")
+    public ResponseEntity<List<UserDto>> getFemaleUsers(){
+        var users= userService.getFemaleUsers();
+        if(users == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(users);
+    }
     @PostMapping
     public ResponseEntity<Long> save(@RequestBody UserDto userDto){
         var id = userService.save(userDto);

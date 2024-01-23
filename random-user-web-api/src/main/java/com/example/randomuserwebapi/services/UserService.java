@@ -6,6 +6,8 @@ import com.example.randomuserwebapi.contracts.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -69,7 +71,64 @@ public UserDto deleteById(long id) {
         }
         return users.stream().map(UserService::mapFromUser).toList();
     }
-private static User getUserFromDto(UserDto userDto, User user){
+
+    @Override
+    public List<UserDto> getOlderThan(int age) {
+        var users = database.getUserRepository().findAll();
+        if(users == null){
+            return null;
+        }
+        return users.stream()
+                .filter(user -> getAge(LocalDate.parse(user.getDateOfBirth())) > age)
+                .map(UserService::mapFromUser)
+                .toList();
+    }
+
+    @Override
+    public List<UserDto> getYoungerThan(int age) {
+        var users = database.getUserRepository().findAll();
+        if(users == null){
+            return null;
+        }
+        return users.stream()
+                .filter(user -> getAge(LocalDate.parse(user.getDateOfBirth())) < age)
+                .map(UserService::mapFromUser)
+                .toList();
+    }
+
+    @Override
+    public List<UserDto> getFemaleUsers() {
+        var users = database.getUserRepository().findAll();
+        if(users == null){
+            return null;
+        }
+        return users.stream()
+                .filter(user -> "Female".equalsIgnoreCase(user.getGender()))
+                .map(UserService::mapFromUser)
+                .toList();
+    }
+
+    @Override
+    public List<UserDto> getMaleUsers() {
+        var users = database.getUserRepository().findAll();
+        if(users == null){
+            return null;
+        }
+        return users.stream()
+                .filter(user -> "Male".equalsIgnoreCase(user.getGender()))
+                .map(UserService::mapFromUser)
+                .toList();
+    }
+
+    private int getAge(LocalDate dateOfBirth){
+        if(dateOfBirth!=null){
+            return Period.between(dateOfBirth, LocalDate.now()).getYears();
+        }else{
+            return 0;
+        }
+    }
+
+    private static User getUserFromDto(UserDto userDto, User user){
         user.setId(userDto.getId());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
