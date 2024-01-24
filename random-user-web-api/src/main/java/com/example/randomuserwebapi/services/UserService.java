@@ -29,16 +29,6 @@ public class UserService implements IUserService{
         var u=database.getUserRepository().save(user);
         return u.getId();
     }
-
-//    @Override
-//    public UserDto deleteById(long id) {
-//        var user = database.getUserRepository().findById(id).orElse(null);
-//        if(user == null){
-//            return null;
-//        }
-//        database.getUserRepository().delete(user);
-//        return mapFromUser(user);
-//    }
     @Override
 public UserDto deleteById(long id) {
     var user = database.getUserRepository().findById(id).orElse(null);
@@ -131,7 +121,6 @@ public UserDto deleteById(long id) {
                 .map(UserService::mapFromUser)
                 .toList();
     }
-
     private int getAge(LocalDate dateOfBirth){
         if(dateOfBirth!=null){
             return Period.between(dateOfBirth, LocalDate.now()).getYears();
